@@ -1,0 +1,22 @@
+@import "../../../../styles/variables.scss";
+@mixin btn {
+  all:unset;
+  cursor: pointer;
+  width: 100%;
+  padding:0 11px;
+  text-align: center;
+  border-radius: 4px;
+}
+.button_primary {
+  &_normal{
+    @include btn;
+    height:40px;
+    background-color: $primary-default;
+    color:$backgroud-default;
+    &:disabled{
+      opacity: 0.5;
+    }
+  }  
+
+}
+
