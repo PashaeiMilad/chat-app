@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import Button from '../../components/global-components/Button';
 import { useLoginMutation } from '../../services/authenticationService';
@@ -8,21 +8,31 @@ import style from './style/authentication.module.scss';
 
 export default function Authentication() {
   const [userInputValue, setUserInputValue] = useState("");
+  const [isComponentRendered, setIsComponenetRendered] = useState(false);
   const [login, { isLoading }] = useLoginMutation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setIsComponenetRendered(true);
+  }, [])
+
   const bindUserInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setUserInputValue(event.target.value)
   }
   const onSubmitClick = async () => {
     try {
-      const user = await login({user_name:userInputValue}).unwrap()
+      const user = await login({ user_name: userInputValue }).unwrap()
       dispatch(setCredentials(user))
     } catch (err) {
       console.log(err)
     }
   }
   return (
-    <div className={style["container"]}>
+
+    <div className={isComponentRendered ?
+      `${style["container"]} ${style["fade-in"]}` :
+      style["container"]}
+    >
       <span className={style["welcome"]}>welcome</span>
       <div className={style["avatar-container"]}>
         <Image src="/icons/user.svg" alt='user-avatar' width={40} height={40} />

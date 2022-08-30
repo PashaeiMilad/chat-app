@@ -1,0 +1,19 @@
+@import "../../../styles/variables.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 32px;
+
+  width: 320px;
+  height: 800px;
+
+
+  background: #17191F;
+
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  background-color: $layout-base;
+}
